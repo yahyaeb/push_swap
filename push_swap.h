@@ -12,4 +12,10 @@ int stack_b[STACK_SIZE];
 int top_a = -1;
 int top_b = -1;
 
+typedef struct s_list
+{
+	char * content;
+	struct s_list *next;
+} t_list;
+
 #endif
