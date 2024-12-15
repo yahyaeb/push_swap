@@ -92,7 +92,19 @@ void rra(t_list **stack_a)
     (*stack_a)->next = original_head;
 }
 
-void rra(t_list **stack_b)
+// rrb (reverse rotate b): Shift down all elements of stack b by 1.
+// The last element becomes the first one.
+void rrb(t_list **stack_b)
 {
-    
+    t_list* original_head = (*stack_b);
+    t_list* second_last_head;
+
+    second_last_head = (*stack_b);
+    while(second_last_head->next->next)
+    {
+        second_last_head = second_last_head->next;
+    }
+    (*stack_b) = second_last_head->next;
+    (*stack_b)->next = original_head;
+    second_last_head->next = NULL;
 }
