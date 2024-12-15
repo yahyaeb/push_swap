@@ -10,32 +10,18 @@ void sa(t_list **stack)
     t_list *original_head;
     t_list *second_node;
 
-    // Storing the original node and the second node in temp struct pointers
-    original_head = *stack;          // Save the original head (Node1)
-    second_node = (*stack)->next;    // Save the second node (Node2)
-
-    // Setting up the head of the list to be equal to the second node
-    *stack = second_node;            // Now the new head is Node2
-
-    // Now the second node is equal to the original head
-    (*stack)->next = original_head;  // Node2->next = Node1
-
-    // The current second node, which was the original node, points to the third node
-    original_head->next = second_node->next; // Node1->next = Node3 (or NULL if there's no Node3)
+    original_head = *stack; 
+    second_node = (*stack)->next;
+    *stack = second_node;
+    (*stack)->next = original_head;
+    original_head->next = second_node->next;
 }
 
 // sb (swap b): Swap the first 2 elements at the top of stack b.
 // Do nothing if there is only one or no elements.
-void sa(t_list **stack)
+void sb(t_list **stack)
 {
-	t_list *original_node;
-	t_list *second_node;
-
-	original_node = (*stack);
-	second_node = (*stack)->next;
-	(*stack)= second_node;
-	(*stack)->next = original_node;
-	original_node->next = second_node->next;
+	sa(stack);
 }
 
 void pa(t_list **stack_a, t_list **stack_b)
@@ -54,13 +40,59 @@ void pa(t_list **stack_a, t_list **stack_b)
 // Do nothing if a is empty.
 void pb(t_list **stack_b, t_list **stack_a)
 {
-    t_list *original_a;
+    pa(stack_a, stack_b);
+}
 
-    if(*stack_a == NULL)
-        return;
+// ra (rotate a): Shift up all elements of stack a by 1.
+// The first element becomes the last one.
+void ra(t_list **stack_a)
+{
+    t_list *original_head;
+    t_list *last_head;
+    t_list *current_node;
     
-    original_a = (*stack_a);
-    (*stack_a) = (*stack_a)->next;
-    original_a->next = (*stack_b);
-    (*stack_b) = original_a;
+    if((*stack_a) == NULL || (*stack_a)->next == NULL)
+        return ;
+    current_node = (*stack_a);
+    original_head = (*stack_a);
+    while(current_node->next != NULL)
+    {
+       current_node = current_node->next;
+    }
+    last_head = current_node;
+    
+    (*stack_a) = original_head->next;
+    last_head->next = original_head;
+    original_head->next = NULL;
+}
+void    rb(t_list **stack_b)
+{
+    ra((stack_b));
+}
+// rra (reverse rotate a): Shift down all elements of stack a by 1.
+// The last element becomes the first one.
+void rra(t_list **stack_a)
+{
+    if((*stack_a) == NULL || (*stack_a)->next == NULL)
+        return;
+
+    t_list *original_head;
+    t_list *second_last;
+    t_list *last;
+
+    original_head = (*stack_a);
+    second_last = (*stack_a);
+    
+    while(second_last->next->next)
+    {
+        second_last = second_last->next;
+    }
+    (*stack_a) = second_last->next;
+    second_last->next = NULL;
+    (*stack_a)->next = original_head;
+}
+
+void rra(t_list **stack_b)
+{
+    
 }
