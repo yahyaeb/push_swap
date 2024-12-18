@@ -6,12 +6,12 @@
 /*   By: yel-bouk <yel-bouk@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 22:12:24 by yel-bouk          #+#    #+#             */
-/*   Updated: 2024/12/17 23:50:34 by yel-bouk         ###   ########.fr       */
+/*   Updated: 2024/12/18 13:35:42 by yel-bouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
+int total_operations = 0;
 // sa (swap a): Swap the first 2 elements at the top of stack a.
 // Do nothing if there is only one or no elements.
 
@@ -27,6 +27,7 @@ void sa(t_list **stack)
     *stack = second_node;
     original_head->next = second_node->next;
     (*stack)->next = original_head;
+    total_operations++;
 }
 
 // sb (swap b): Swap the first 2 elements at the top of stack b.
@@ -34,6 +35,7 @@ void sa(t_list **stack)
 void sb(t_list **stack)
 {
 	sa(stack);
+    total_operations++;
 }
 
 void pa(t_list **stack_a, t_list **stack_b)
@@ -46,6 +48,7 @@ void pa(t_list **stack_a, t_list **stack_b)
     (*stack_b) = (*stack_b)->next;
     original_head_b->next = (*stack_a);
     *stack_a = original_head_b;
+    total_operations++;
 }
 
 // pb (push b): Take the first element at the top of a and put it at the top of b.
@@ -53,6 +56,7 @@ void pa(t_list **stack_a, t_list **stack_b)
 void pb(t_list **stack_b, t_list **stack_a)
 {
     pa(stack_a, stack_b);
+    total_operations++;
 }
 
 // ra (rotate a): Shift up all elements of stack a by 1.
@@ -74,10 +78,12 @@ void ra(t_list **stack_a)
     current_node->next = original_head;
     *stack_a = original_head->next;
     original_head->next = NULL;
+    total_operations++;
 }
 void    rb(t_list **stack_b)
 {
     ra(stack_b);
+    total_operations++;
 }
 // rra (reverse rotate a): Shift down all elements of stack a by 1.
 // The last element becomes the first one.
@@ -98,6 +104,7 @@ void rra(t_list **stack_a)
     (*stack_a) = second_last->next;
     second_last->next = NULL;
     (*stack_a)->next = original_head;
+    total_operations++;
 }
 
 // rrb (reverse rotate b): Shift down all elements of stack b by 1.
@@ -105,15 +112,18 @@ void rra(t_list **stack_a)
 void rrb(t_list **stack_b)
 {
    rra(stack_b);
+   total_operations++;
 }
 // rrr : rra and rrb at the same time.
 void rrr(t_list **array_a, t_list **array_b)
 {
     rra(array_a);
 	rrb(array_b);
+    total_operations++;
 }
 void rr(t_list **array_a,t_list **array_b)
 {
     ra(array_a);
     rb(array_b);
+    total_operations++;
 }

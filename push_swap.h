@@ -6,7 +6,7 @@
 /*   By: yel-bouk <yel-bouk@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 22:12:29 by yel-bouk          #+#    #+#             */
-/*   Updated: 2024/12/17 23:36:21 by yel-bouk         ###   ########.fr       */
+/*   Updated: 2024/12/18 13:35:00 by yel-bouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <stdlib.h>
 
 #define STACK_SIZE 100
+extern int total_operations;
 
 typedef struct s_list
 {
@@ -42,5 +43,4 @@ int	stack_size(t_list *stack);
 void push_min_to_b(t_list **stack_a, t_list **stack_b);
 void sort_three(t_list **stack_a);
 void sort_large(t_list **stack_a, t_list **stack_b);
-void print_stack(t_list *stack, const char *name);
 #endif

@@ -6,11 +6,13 @@
 /*   By: yel-bouk <yel-bouk@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 22:41:59 by yel-bouk          #+#    #+#             */
-/*   Updated: 2024/12/18 00:09:23 by yel-bouk         ###   ########.fr       */
+/*   Updated: 2024/12/18 13:42:53 by yel-bouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+
 void sort_three(t_list **stack_a)
 {
     if (!*stack_a || is_sorted(*stack_a))
@@ -25,13 +27,18 @@ void sort_three(t_list **stack_a)
         sa(stack_a);
     else if (find_pos(*stack_a, max) == 1)
         sa(stack_a);
-
     if (!is_sorted(*stack_a))
     {
         if (find_pos(*stack_a, min) == 1)
             sa(stack_a);
         else if (find_pos(*stack_a, max) == 0)
             rra(stack_a);
+    }
+    if(!is_sorted(*stack_a) && find_pos(*stack_a, min) == 0 && find_pos(*stack_a, max) == 1)
+    {
+        ra(stack_a);
+        sa(stack_a);
+        rra(stack_a);
     }
 }
 
@@ -90,38 +97,14 @@ void push_node_back(t_list **stack, int value)
 int main()
 {
     // Case: 100 elements - Mixed order with positive and negative values
-    t_list *stack_a = create_node(23);
-    stack_a->next = create_node(-10);
-    stack_a->next->next = create_node(45);
-    stack_a->next->next->next = create_node(-25);
-    stack_a->next->next->next->next = create_node(5);
-    stack_a->next->next->next->next->next = create_node(0);
-    stack_a->next->next->next->next->next->next = create_node(-3);
-    stack_a->next->next->next->next->next->next->next = create_node(12);
-    stack_a->next->next->next->next->next->next->next->next = create_node(8);
-    stack_a->next->next->next->next->next->next->next->next->next = create_node(-50);
-    stack_a->next->next->next->next->next->next->next->next->next->next = create_node(67);
-    stack_a->next->next->next->next->next->next->next->next->next->next->next = create_node(4);
-    stack_a->next->next->next->next->next->next->next->next->next->next->next->next = create_node(-12);
-    stack_a->next->next->next->next->next->next->next->next->next->next->next->next->next = create_node(9);
-    stack_a->next->next->next->next->next->next->next->next->next->next->next->next->next->next = create_node(-20);
-    stack_a->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next = create_node(34);
-    stack_a->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next = create_node(17);
-    stack_a->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next = create_node(-4);
-    stack_a->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next = create_node(55);
-    stack_a->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next = create_node(11);
-    stack_a->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next = create_node(-2);
-    stack_a->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next = create_node(88);
-    stack_a->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next = create_node(-18);
-    stack_a->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next = create_node(100);
-    stack_a->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next = create_node(-100);
-    stack_a->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next = create_node(99);
-    stack_a->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next = create_node(-99);
-    stack_a->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next->next = create_node(19);
-
-    // Add more nodes to complete 100 elements
+    t_list *stack_a;
+    //Add more nodes to complete 100 elements
     for (int i = 1; i <= 500; i++)
-        push_node_back(&stack_a, i * ((i % 2 == 0) ? -1 : 1)); // Alternating positive and negative values
+{
+    int value = i * ((i % 2 == 0) ? -1 : 1); // Generate value
+    if (find_pos(stack_a, value) == -1)     // Check if value already exists
+        push_node_back(&stack_a, value);    // Add value only if it's unique
+}
 
     t_list *stack_b = NULL;
 
@@ -132,8 +115,8 @@ int main()
     sort_large(&stack_a, &stack_b);
 
     printf("\nAfter sorting 100 elements:\n");
-    print_stack(stack_a, "stack_a");
-
+    print_stack(stack_a, "stack_a ");
+    printf("Total operations performed: %d\n", total_operations);
     // Free memory
     free_stack(&stack_a);
     free_stack(&stack_b);
