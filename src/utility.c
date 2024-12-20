@@ -6,11 +6,11 @@
 /*   By: yel-bouk <yel-bouk@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 22:12:21 by yel-bouk          #+#    #+#             */
-/*   Updated: 2024/12/16 15:09:32 by yel-bouk         ###   ########.fr       */
+/*   Updated: 2024/12/19 12:26:20 by yel-bouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../includes/push_swap.h"
 
 int	is_sorted(t_list *stack)
 {
@@ -53,7 +53,7 @@ int	find_pos(t_list *stack, int value)
 	int	pos;
 
 	pos = 0;
-	while(stack && stack->next)
+	while(stack)
 	{
 		if(stack->value == value)
 			return pos;

@@ -1,33 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   commands_helper.c                                  :+:      :+:    :+:   */
+/*   handlers_chars.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-bouk <yel-bouk@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/16 17:25:17 by yel-bouk          #+#    #+#             */
-/*   Updated: 2024/12/17 23:51:26 by yel-bouk         ###   ########.fr       */
+/*   Created: 2024/11/23 19:46:19 by yel-bouk          #+#    #+#             */
+/*   Updated: 2024/12/17 21:30:48 by yel-bouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../includes/ft_printf.h"
 
-void push_min_to_b(t_list **stack_a, t_list **stack_b)
+int	handle_strings(char *str)
 {
-    int min;
-    int position;
-    int size;
+	if (!str)
+		str = "(null)";
+	ft_putstr(str);
+	return (ft_strlen(str));
+}
 
-    min = find_min(*stack_a);
-    size = stack_size(*stack_a);
-    position = find_pos(*stack_a, min);
-
-    while (find_pos(*stack_a, min) != 0)
-    {
-        if (position <= size / 2)
-            ra(stack_a);
-        else
-            rra(stack_a);
-    }
-    pb(stack_a, stack_b);
+int	handle_char(char c)
+{
+	ft_putchar(c);
+	return (1);
+}
+int	handle_pointers(void *ptr)
+{
+	if (!ptr)
+	{
+		write(1, "0x0", 3);
+		return (3);
+	}
+	write(1, "0x", 2);
+	return (2 + ft_print_pointer((uintptr_t)ptr));
 }

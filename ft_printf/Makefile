@@ -6,49 +6,30 @@
 #    By: yel-bouk <yel-bouk@student.42nice.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/22 15:13:25 by yel-bouk          #+#    #+#              #
-#    Updated: 2024/12/19 17:51:18 by yel-bouk         ###   ########.fr        #
+#    Updated: 2024/12/17 21:33:00 by yel-bouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = push_swap
+NAME = libftprintf.a
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address -g3
+CFLAGS = -Wall -Werror -Wextra -g
 RM = rm -f
 
-SRCS = \
-    ./libft/ft_split.c \
-    ./libft/ft_atoi.c \
-    ./libft/ft_strncpy.c \
-    ./libft/ft_bzero.c \
-    ./libft/ft_isdigit.c \
-    ./libft/ft_lstsize.c \
-    ./libft/ft_calloc.c \
-    ./src/pb_custom.c \
-    ./src/push_swap.c \
-    ./src/main.c \
-    ./src/sorting_large.c \
-    ./src/utility.c \
-    ./src/stack_manipulation.c \
-    ./src/input_converter.c \
-    ./src/input_manager.c
-OBJS = $(SRCS:.c=.o)
+SRCS = srcs/ftprintf.c srcs/handlers_chars.c srcs/letters.c srcs/number.c srcs/utility.c
+OBJS	= $(SRCS:.c=.o)
 
-FT_PRINTF = ./ft_printf/libftprintf.a
 
-all: $(NAME)
+all:	$(NAME)
 
-$(NAME): $(OBJS) $(FT_PRINTF)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(FT_PRINTF)
-
-%.o: %.c push_swap.h
-	$(CC) $(CFLAGS) -c $< -o $@
+$(NAME):	$(OBJS)
+			ar rcs $(NAME) $(OBJS)
 
 clean:
-	$(RM) $(OBJS)
+			$(RM) $(OBJS)
 
-fclean: clean
-	$(RM) $(NAME)
+fclean:		clean
+			$(RM) $(NAME) 
 
-re: fclean all
+re:			fclean all
 
-.PHONY: all clean fclean re
+.PHONY:		all clean fclean re
