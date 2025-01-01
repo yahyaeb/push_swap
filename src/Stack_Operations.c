@@ -6,7 +6,7 @@
 /*   By: yel-bouk <yel-bouk@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 22:12:24 by yel-bouk          #+#    #+#             */
-/*   Updated: 2024/12/19 12:59:40 by yel-bouk         ###   ########.fr       */
+/*   Updated: 2024/12/30 21:14:13 by yel-bouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void sa(t_list **stack)
     *stack = second_node;
     original_head->next = second_node->next;
     (*stack)->next = original_head;
-    total_operations++;
-    ft_printf("sa\n");
 }
 void sb(t_list **stack)
 {
@@ -39,8 +37,6 @@ void sb(t_list **stack)
     *stack = second_node;
     original_head->next = second_node->next;
     (*stack)->next = original_head;
-    total_operations++;
-    ft_printf("sb\n");
 }
 
 void pa(t_list **stack_a, t_list **stack_b)
@@ -53,23 +49,22 @@ void pa(t_list **stack_a, t_list **stack_b)
     (*stack_b) = (*stack_b)->next;
     original_head_b->next = (*stack_a);
     *stack_a = original_head_b;
-    total_operations++;
-    ft_printf("pa\n");
 }
 
 void pb(t_list **stack_b, t_list **stack_a)
 {
     t_list *original_head_a;
 
-    if(*stack_a == NULL)
+    if(!*stack_a || !stack_a)
+    {
+         ft_printf("Error: stack_a is NULL; cannot push.\n");
         return;
+    }
     original_head_a = (*stack_a);
     (*stack_a) = (*stack_a)->next;
     original_head_a->next = (*stack_b);
     *stack_b = original_head_a;
-
-    total_operations++;
-    ft_printf("pb\n");
+    
 }
 void ra(t_list **stack_a)
 {
@@ -80,16 +75,13 @@ void ra(t_list **stack_a)
         return ;
     current_node = (*stack_a);
     original_head = (*stack_a);
-    while(current_node->next != NULL)
-    {
-       current_node = current_node->next;
-    }
-    
+    while (current_node->next != NULL)
+        current_node = current_node->next;
+
     current_node->next = original_head;
     *stack_a = original_head->next;
     original_head->next = NULL;
-    total_operations++;
-    ft_printf("ra\n");
+
 }
 void    rb(t_list **stack_b)
 {
@@ -108,9 +100,6 @@ void    rb(t_list **stack_b)
     current_node->next = original_head;
     *stack_b = original_head->next;
     original_head->next = NULL;
-
-    total_operations++;
-    ft_printf("rb\n");
 }
 void rra(t_list **stack_a)
 {
@@ -129,8 +118,6 @@ void rra(t_list **stack_a)
     (*stack_a) = second_last->next;
     second_last->next = NULL;
     (*stack_a)->next = original_head;
-    total_operations++;
-    ft_printf("rra\n");
 }
 void rrb(t_list **stack_b)
 {
@@ -149,15 +136,11 @@ void rrb(t_list **stack_b)
     (*stack_b) = second_last->next;
     second_last->next = NULL;
     (*stack_b)->next = original_head;
-
-    total_operations++;
-    ft_printf("rrb\n");
 }
 void rrr(t_list **array_a, t_list **array_b)
 {
     rra(array_a); 
     rrb(array_b);
-    ft_printf("rrr\n");
 }
 void rr(t_list **array_a,t_list **array_b)
 {

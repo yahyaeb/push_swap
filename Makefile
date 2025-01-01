@@ -6,7 +6,7 @@
 #    By: yel-bouk <yel-bouk@student.42nice.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/22 15:13:25 by yel-bouk          #+#    #+#              #
-#    Updated: 2024/12/19 17:51:18 by yel-bouk         ###   ########.fr        #
+#    Updated: 2025/01/01 21:42:05 by yel-bouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,14 +23,12 @@ SRCS = \
     ./libft/ft_isdigit.c \
     ./libft/ft_lstsize.c \
     ./libft/ft_calloc.c \
-    ./src/pb_custom.c \
-    ./src/push_swap.c \
+    ./src/sorting_algo.c \
     ./src/main.c \
-    ./src/sorting_large.c \
+    ./src/Stack_Operations.c \
     ./src/utility.c \
     ./src/stack_manipulation.c \
-    ./src/input_converter.c \
-    ./src/input_manager.c
+    ./src/input_handler.c 
 OBJS = $(SRCS:.c=.o)
 
 FT_PRINTF = ./ft_printf/libftprintf.a
