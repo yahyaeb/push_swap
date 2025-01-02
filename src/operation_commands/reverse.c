@@ -6,7 +6,7 @@
 /*   By: yel-bouk <yel-bouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 14:20:06 by yel-bouk          #+#    #+#             */
-/*   Updated: 2025/01/02 17:17:19 by yel-bouk         ###   ########.fr       */
+/*   Updated: 2025/01/02 17:53:15 by yel-bouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ ft_printf("I am here3");
     // Set the new tail to the previous node
     new_tail = tail->prev;
     ft_printf("I am here4");
+    ft_printf("I am here4.5");
     if (new_tail) 
         new_tail->next = NULL; // Disconnect the old tail
     ft_printf("I am here5");
