@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utility.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-bouk <yel-bouk@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: yel-bouk <yel-bouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 22:12:21 by yel-bouk          #+#    #+#             */
-/*   Updated: 2025/01/01 21:42:18 by yel-bouk         ###   ########.fr       */
+/*   Updated: 2025/01/02 16:35:03 by yel-bouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int is_sorted(t_list *stack) {
     return 1;
 }
 
-int find_min(t_list *stack)
+int find_min_index(t_list *stack)
 {
     if (!stack)
         return -1;
@@ -101,7 +101,7 @@ int find_min(t_list *stack)
 
     return min_index; 
 }
-int find_max(t_list *stack)
+int find_max_index(t_list *stack)
 {
     if (!stack)
         return -1;

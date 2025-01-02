@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-bouk <yel-bouk@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: yel-bouk <yel-bouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 14:45:43 by yel-bouk          #+#    #+#             */
-/*   Updated: 2024/12/17 21:32:33 by yel-bouk         ###   ########.fr       */
+/*   Updated: 2025/01/02 16:42:36 by yel-bouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FT_PRINTF_H
 
 # include <stdio.h>
+# include <stdint.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>

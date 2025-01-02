@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_manipulation.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-bouk <yel-bouk@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: yel-bouk <yel-bouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:34:22 by yel-bouk          #+#    #+#             */
-/*   Updated: 2024/12/19 18:11:52 by yel-bouk         ###   ########.fr       */
+/*   Updated: 2025/01/02 16:25:31 by yel-bouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,25 +43,27 @@ void print_stack(t_list *stack, const char *name)
     }
     ft_printf("NULL\n");
 }
-t_list *create_list(int * array, int size)
+t_list *create_list(int *array, int size)
 {
-    if(size == 0)
+    if (size == 0)
         return NULL;
 
-        t_list * head;
-        t_list *tail;
-        t_list *new_node;
-        int i;
+    t_list *head;
+    t_list *tail;
+    t_list *new_node;
+    int i;
 
-        i = 1;
-        head = create_node(array[0]);
-        tail = head;
-        while(i < size)
-        {
-            new_node = create_node(array[i]);
-            tail->next = new_node;
-            tail = new_node;
-            i++;
-        }
-        return head;
+    i = 1;
+    head = create_node(array[0]);
+    tail = head;
+    while (i < size)
+    {
+        new_node = create_node(array[i]);
+        tail->next = new_node;
+        tail = new_node;
+        i++;
+    }
+    return head;
 }
+
+
