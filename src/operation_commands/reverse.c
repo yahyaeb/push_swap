@@ -3,61 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   reverse.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-bouk <yel-bouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-bouk <yel-bouk@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 14:20:06 by yel-bouk          #+#    #+#             */
-/*   Updated: 2025/01/02 17:53:15 by yel-bouk         ###   ########.fr       */
+/*   Updated: 2025/01/03 11:53:35 by yel-bouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-void reverse_rotate(t_list **stack)
-{
-    if (!(*stack) || !(*stack)->next) // Check for empty or single-node list
+void reverse_rotate(t_list **stack) {
+    if (!*stack || !(*stack)->next)
         return;
-    ft_printf("I am here1");
-    t_list *tail = *stack;
-    t_list *new_tail = NULL;
-ft_printf("I am here2");
-    // Traverse to the tail of the list
-    while (tail->next)
-        tail = tail->next;
-ft_printf("I am here3");
-    // Set the new tail to the previous node
-    new_tail = tail->prev;
-    ft_printf("I am here4");
-    ft_printf("I am here4.5");
-    if (new_tail) 
-        new_tail->next = NULL; // Disconnect the old tail
-    ft_printf("I am here5");
-    // Move the old tail to the front of the list
-    tail->next = *stack;
-    ft_printf("I am here6");
-    tail->prev = NULL;
-    ft_printf("I am here7");
+
+    t_list *last = *stack;
+    t_list *second_last = NULL;
+
+    // Traverse to the last node and keep track of the second last node
+    while (last->next) {
+        second_last = last;
+        last = last->next;
+    }
+    // Detach the last node from the list
+    if (second_last)
+        second_last->next = NULL;
+
+    if (last) 
+        last->prev = NULL;
+
+    // Move the detached last node to the front
+    last->next = *stack;
     if (*stack)
-        (*stack)->prev = tail;
-    ft_printf("I am here8");
-    *stack = tail; // Update the head pointer
+        (*stack)->prev = last;
+    *stack = last;
 }
-
-
-
 
 void rra(t_list **stack_a)
 {
     reverse_rotate(stack_a);
     ft_printf("rra\n");
+    total_operations++;
 }
 void rrb(t_list **stack_b)
 {
     reverse_rotate(stack_b);
     ft_printf("rrb\n");
+    total_operations++;
 }
 void rrr(t_list **stack_a, t_list **stack_b)
 {
     reverse_rotate(stack_a);
     reverse_rotate(stack_b);
     ft_printf("rrr\n");
+    total_operations++;
 }

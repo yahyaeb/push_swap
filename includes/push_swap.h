@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-bouk <yel-bouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-bouk <yel-bouk@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 22:12:29 by yel-bouk          #+#    #+#             */
-/*   Updated: 2025/01/02 16:12:46 by yel-bouk         ###   ########.fr       */
+/*   Updated: 2025/01/04 20:44:45 by yel-bouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_list
     int value;               // The value of the node
     int cost_a;              // Cost to move its target node to the top of stack_a
     int cost_b;              // Cost to move this node to the top of stack_b
+    int total_cost;          // Total cost (sum of cost_a and cost_b)
     struct s_list *target;   // Pointer to the target node in stack_a
     struct s_list *next;     // Pointer to the next node
     struct s_list *prev;     // Pointer to the previous node
@@ -65,6 +66,7 @@ t_list* find_max(t_list *stack);
 
 // Sorting Algorithms
 void sort_three(t_list **stack_a);
+void	sort_three_or_two(t_list **stack_a);
 
 // Input Handling
 int *string_to_int(char *str);
@@ -81,4 +83,16 @@ char **ft_split(char const *s, char c);
 char *ft_strncpy(char *dest, const char *src, size_t n);
 void ft_bzero(void *ptr, size_t num);
 
+void push_to_base_case(t_list **stack_a, t_list **stack_b);
+void assign_target_nodes(t_list *stack_a, t_list *stack_b);
+
+int calculate_position(t_list *stack, t_list *node);
+void calculate_costs(t_list *stack_a, t_list *stack_b);
+void execute_cheapest_move(t_list **stack_a, t_list **stack_b);
+void align_stack_a(t_list **stack_a);
+void debug_target_nodes(t_list *stack_a);
+void debug_and_push_cheapest(t_list **stack_a, t_list **stack_b);
+
+t_list *find_target_node(t_list *stack_b, int value_a);
+t_list *find_cheapest_move(t_list *stack_a);
 #endif

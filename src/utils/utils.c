@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-bouk <yel-bouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-bouk <yel-bouk@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 14:55:05 by yel-bouk          #+#    #+#             */
-/*   Updated: 2025/01/02 16:12:46 by yel-bouk         ###   ########.fr       */
+/*   Updated: 2025/01/04 20:28:04 by yel-bouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,35 @@ t_list* find_min(t_list *stack)
         stack = stack->next;
     }
     return (min_node);
+}
+
+void debug_target_nodes(t_list *stack_a)
+{
+    t_list *current = stack_a;
+    while (current)
+    {
+        if (!current->target)
+            printf("Error: Target is NULL for value %d\n", current->value);
+        else
+            printf("Value: %d -> Target: %d\n", current->value, current->target->value);
+        current = current->next;
+    }
+}
+int is_sorted(t_list *stack) {
+    while (stack && stack->next) 
+    {
+        if (stack->value > stack->next->value) 
+		return 0;
+        stack = stack->next;
+    }
+    return 1;
+}
+
+int stack_size(t_list *stack) {
+    int size = 0;
+    while (stack) {
+        stack = stack->next;
+        size++;
+    }
+    return size;
 }

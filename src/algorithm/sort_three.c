@@ -3,25 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   sort_three.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-bouk <yel-bouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-bouk <yel-bouk@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 14:47:49 by yel-bouk          #+#    #+#             */
-/*   Updated: 2025/01/02 16:46:21 by yel-bouk         ###   ########.fr       */
+/*   Updated: 2025/01/03 15:15:44 by yel-bouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-void	sort_three(t_list **a) //Define a function that handles when stack `a` has three nodes, and sorts it
+void	sort_three(t_list **stack_a)
 {
-	t_list	*biggest_node; //To store a pointer to the biggest node in stack `a`
-
-	biggest_node = find_max(*a);
-	if (biggest_node == *a) //Check if the current node is the biggest
-		ra(a); //If so, rotate the top node to the bottom of the stack
-	else if ((*a)->next == biggest_node) //Check if the second node is the biggest
-		rra(a); //If so, reverse rotate the bottom node, to the top of the stack
-	if ((*a)->value > (*a)->next->value) //Check if the bottom node is the biggest, but the top node is higher than the second node
-		sa(a); //If so, simply swap the top and second nodes
-        return;
+	if ((*stack_a)->value > (*stack_a)->next->value
+		&& (*stack_a)->next->value < (*stack_a)->next->next->value
+		&& (*stack_a)->next->next->value > (*stack_a)->value)
+		sa(stack_a);
+	else if ((*stack_a)->value > (*stack_a)->next->value
+		&& (*stack_a)->next->value > (*stack_a)->next->next->value)
+	{
+		sa(stack_a);
+		rra(stack_a);
+	}
+	else if ((*stack_a)->value > (*stack_a)->next->value
+		&& (*stack_a)->next->value < (*stack_a)->next->next->value
+		&& (*stack_a)->next->next->value < (*stack_a)->value)
+		ra(stack_a);
+	else if ((*stack_a)->value < (*stack_a)->next->value
+		&& (*stack_a)->next->value > (*stack_a)->next->next->value
+		&& (*stack_a)->next->next->value > (*stack_a)->value)
+	{
+		sa(stack_a);
+		ra(stack_a);
+	}
+	else if ((*stack_a)->value < (*stack_a)->next->value
+		&& (*stack_a)->next->value > (*stack_a)->next->next->value
+		&& (*stack_a)->next->next->value < (*stack_a)->value)
+		rra(stack_a);
+}
+void	sort_three_or_two(t_list **stack_a)
+{
+	if(stack_size(*stack_a) == 2 && !is_sorted(*stack_a))
+			sa(stack_a);
+	else if(stack_size(*stack_a) == 3 && !is_sorted(*stack_a))
+		sort_three(stack_a);
+	else if(stack_size(*stack_a) == 1)
+		return;
 }

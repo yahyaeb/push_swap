@@ -20,10 +20,12 @@ int main(int argc, char *argv[])
 
         ft_printf("Before sorting:\n");
         print_stack(stack_a, "stack_a");
-
-            sort_three(&stack_a);
+        push_to_base_case(&stack_a, &stack_b);
+        // calculate_costs(stack_a, stack_b);
+        calculate_costs(stack_a, stack_b);
         ft_printf("\nAfter sorting:\n");
         print_stack(stack_a, "stack_a");
+        print_stack(stack_b, "stack_b");
         ft_printf("Total operations performed: %d\n", total_operations);
     }
     else
