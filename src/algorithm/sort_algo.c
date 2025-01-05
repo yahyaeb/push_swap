@@ -6,7 +6,7 @@
 /*   By: yel-bouk <yel-bouk@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 22:50:11 by yel-bouk          #+#    #+#             */
-/*   Updated: 2025/01/04 20:45:27 by yel-bouk         ###   ########.fr       */
+/*   Updated: 2025/01/05 22:26:51 by yel-bouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,155 +14,227 @@
 
 void push_to_base_case(t_list **stack_a, t_list **stack_b)
 {
-    while (stack_size(*stack_a) > 3 && stack_size(*stack_b) < 2)
+    while (stack_size(*stack_a) > 3 && stack_size(*stack_b) < 2) // Push until stack_b has 2 elements
         pb(stack_a, stack_b);
 }
-t_list *find_target_node(t_list *stack_b, int value_a) {
-    if (!stack_b) {
-        printf("Error: stack_b is empty. Cannot find target for value %d.\n", value_a);
-        return NULL;
+
+void current_index(t_list *stack)
+{
+    int i = 0;         // Index of the current node
+    int median;        // Position of the median of the stack
+
+    if (!stack)        // Check if the stack is empty
+        return;
+
+    median = stack_size(stack) / 2;  // Calculate the median index
+
+    while (stack) {  
+        stack->index = i;  
+        
+        // Optional change: Determine above_median based on the desired logic
+        stack->above_median = (i > median);  // True only if strictly above the median
+        stack = stack->next;  // Move to the next node
+        ++i;  // Increment the index
     }
-
-    t_list *target_node = NULL;
-    t_list *max_node = find_max(stack_b);
-    long best_match = LONG_MIN;
-
-    while (stack_b) {
-        if (stack_b->value < value_a && stack_b->value > best_match) {
-            best_match = stack_b->value;
-            target_node = stack_b;
-        }
-        stack_b = stack_b->next;
-    }
-
-    if (!target_node) {
-        target_node = max_node;
-    }
-
-    return target_node;
 }
 
+void set_target_a(t_list *stack_a, t_list *stack_b)
+{
+    t_list *current_b;
+    t_list *target_node;
+    long best_match_index;
 
+    while (stack_a)
+    {
+        best_match_index = LONG_MIN;
+        target_node = NULL;  // Reset the target node for each node in `a`
+        current_b = stack_b;
 
+        while (current_b)
+        {
+            if (current_b->value < stack_a->value && current_b->value > best_match_index)
+            {
+                best_match_index = current_b->value;
+                target_node = current_b;
+            }
+            current_b = current_b->next;
+        }
 
-void assign_target_nodes(t_list *stack_a, t_list *stack_b) {
+        if (!target_node)  // If no valid target was found
+            target_node = find_max(stack_b);
+        stack_a->target = target_node;  // Assign the target node
+        stack_a = stack_a->next;
+    }
+}
+void set_target_b(t_list *stack_a, t_list *top_b) {
     t_list *current_a = stack_a;
+    t_list *target_node = NULL;
+    long best_match_value = LONG_MAX;
+
+    // Iterate through stack_a to find the closest larger value
     while (current_a) {
-        t_list *target_node = find_target_node(stack_b, current_a->value);
-        if (!target_node) {
-            printf("Error: No target node found for value %d\n", current_a->value);
-            current_a->target = NULL;
-        } else {
-            printf("Assigned target for value %d: %d\n", current_a->value, target_node->value);
-            current_a->target = target_node;
+        if (current_a->value > top_b->value && current_a->value < best_match_value) {
+            best_match_value = current_a->value;
+            target_node = current_a;
         }
         current_a = current_a->next;
     }
-}
 
-
-
-
-
-int calculate_position(t_list *stack, t_list *node) {
-    int position = 0;
-    printf("Calculating position for node with value: %d\n", node->value);
-    
-    while (stack) {
-        printf("Current stack value: %d\n", stack->value);  // Debug: Print current stack value
-        if (stack == node) {
-            printf("Node found at position: %d\n", position);
-            return position;
-        }
-        stack = stack->next;
-        position++;
+    // If no valid target was found, assign the smallest value in stack_a
+    if (!target_node) {
+        target_node = find_min(stack_a);
     }
-    
-    // Node not found in the stack
-    printf("Error: Node with value %d not found in stack.\n", node->value);
-    return -1;
+    top_b->target = target_node;  // Assign the target node
 }
 
 
 
 
+void calculate_costs(t_list *stack_a, t_list *stack_b)
+{
+    int stack_a_size = stack_size(stack_a);
+    int stack_b_size = stack_size(stack_b);
 
+    t_list *current = stack_a;
 
-void calculate_costs(t_list *stack_a, t_list *stack_b) {
-    t_list *current_b = stack_b;
-    print_stack(stack_b, "stack_b");
-    print_stack(current_b, "current_b");
-    
-    while (current_b) {
-        if (!current_b->target) {
-            printf("Error: Target node is NULL for value %d in stack_b.\n", current_b->value);
-            exit(1);
+    while (current) {
+        if (!current->target) {
+            printf("Error: Target node for value %d is NULL.\n", current->value);
+            current = current->next;
+            continue;
         }
 
-        int pos_a = calculate_position(stack_a, current_b);
-        int pos_b = calculate_position(stack_b, current_b);
+        int pos_a = current->index;  // Position of the node in stack_a
+        int pos_b = current->target->index;  // Position of the target node in stack_b
 
-        if (pos_a == -1 || pos_b == -1) {
-            printf("Error: Invalid position calculated for nodes in stacks.\n");
-            exit(1);
+        // Calculate rotation cost for stack_a
+        int cost_a = (pos_a <= stack_a_size / 2) ? pos_a : stack_a_size - pos_a;
+
+        // Calculate rotation cost for stack_b
+        int cost_b = (pos_b <= stack_b_size / 2) ? pos_b : stack_b_size - pos_b;
+
+        // Special case: If both nodes are already at the top, cost is 0
+        if (pos_a == 0 && pos_b == 0) {
+            current->total_cost = 0;
         }
-
-        current_b->cost_a = (pos_a <= stack_size(stack_a) / 2) ? pos_a : stack_size(stack_a) - pos_a;
-        current_b->cost_b = (pos_b <= stack_size(stack_b) / 2) ? pos_b : stack_size(stack_b) - pos_b;
-        current_b->total_cost = current_b->cost_a + current_b->cost_b;
-        current_b = current_b->next;
+        // Special case: If the positions are the same, use combined rotations (rr or rrr)
+        else if (pos_a == pos_b) {
+            current->total_cost = (pos_a <= stack_a_size / 2) ? pos_a : stack_a_size - pos_a;
+        }
+        // General case: Sum of individual rotation costs
+        else {
+            current->total_cost = cost_a + cost_b;
+        }
+        current = current->next;
     }
 }
+void set_cheapest(t_list *stack)
+{
+    if (!stack)  // Check if the stack is empty
+        return;
 
+    long cheapest_value = LONG_MAX;
+    t_list *cheapest_node = NULL;
 
-// t_list *find_cheapest_move(t_list *stack_b)
-// {
-//     t_list *cheapest_node = stack_b;
-//     t_list *current = stack_b;
+    // Reset all nodes' "cheapest" flags to false before finding the new cheapest node
+    t_list *current = stack;
+    while (current)
+    {
+        current->cheapest = false;  // Reset the flag
+        current = current->next;
+    }
 
-//     if (!stack_b) {
-//         printf("Error: stack_b is empty.\n");
-//         return NULL;
-//     }
+    // Find the node with the minimum push_cost
+    current = stack;
+    while (current)
+    {
+        if (current->total_cost < cheapest_value)
+        {
+            cheapest_value = current->total_cost;
+            cheapest_node = current;
+        }
+        current = current->next;
+    }
 
-//     while (current)
-//     {
-//         printf("Node value: %d, Total cost: %d\n", current->value, current->total_cost);
-//         if (current->total_cost < cheapest_node->total_cost)
-//             cheapest_node = current;
-//         current = current->next;
-//     }
+    if (cheapest_node)  // Set the cheapest node's "cheapest" attribute to true
+		cheapest_node->cheapest = true;
 
-//     printf("Found cheapest node: %d with total cost %d\n", cheapest_node->value, cheapest_node->total_cost);
-//     return cheapest_node;
-// }
+}
+void prep_for_push(t_list **stack, t_list *top_node, char stack_name)
+{
+    // Rotate until the `top_node` is at the top of the stack
+    while (*stack != top_node)
+    {
+        if (stack_name == 'a')
+        {
+            if (top_node->above_median)
+                ra(stack);  // Rotate `stack_a` (ra)
+            else
+                rra(stack);  // Reverse rotate `stack_a` (rra)
+        }
+        else if (stack_name == 'b')
+        {
+            if (top_node->above_median)
+                rb(stack);  // Rotate `stack_b` (rb)
+            else
+                rrb(stack);  // Reverse rotate `stack_b` (rrb)
+        }
+    }
+}
+void move_a_to_b(t_list **stack_a, t_list **stack_b)
+{
+    t_list *cheapest_node = get_cheapest(*stack_a);  // Get the cheapest node in stack_a
 
-// void debug_and_push_cheapest(t_list **stack_a, t_list **stack_b)
-// {
-//     t_list *cheapest_node = find_cheapest_move(*stack_b);
+    if (cheapest_node->above_median && cheapest_node->target->above_median)
+    {
+        rotate_both(stack_a, stack_b, cheapest_node);  // Perform double rotate (`rr`)
+    }
+    else if (!cheapest_node->above_median && !cheapest_node->target->above_median)
+    {
+        rev_rotate_both(stack_a, stack_b, cheapest_node);  // Perform double reverse rotate (`rrr`)
+    }
+    
+    // Rotate stack_a and stack_b separately to prepare for `pb`.
+    prep_for_push(stack_a, cheapest_node, 'a');
+    prep_for_push(stack_b, cheapest_node->target, 'b');
+    pb(stack_a, stack_b);  // Push the node from stack_a to stack_b
+}
+void move_b_to_a(t_list **stack_a, t_list **stack_b)
+{
+    	current_index(*stack_a);  // Update indices for stack_a
+    	current_index(*stack_b);  // Update indices for stack_b
+    	set_target_b(*stack_a, *stack_b);  // Assign targets for stack_b
+	prep_for_push(stack_a, (*stack_b)->target, 'a');
+	pa(stack_a, stack_b);
+}
 
-//     if (!cheapest_node) {
-//         printf("Error: No cheapest node found.\n");
-//         return;
-//     }
-//     if (!cheapest_node->target) {
-//         printf("Error: Cheapest node %d has no target.\n", cheapest_node->value);
-//         return;
-//     }
+void	init_nodes_a(t_list *stack_a, t_list *stack_b)
+{
+	current_index(stack_a);
+	current_index(stack_b);
+	set_target_a(stack_a, stack_b);
+	calculate_costs(stack_a, stack_b);
+	set_cheapest(stack_a);
+}
+void sort_stacks(t_list **stack_a, t_list **stack_b) {
+    int stack_size_a;
 
-//     printf("Cheapest move:\n");
-//     printf("- Value: %d\n", cheapest_node->value);
-//     printf("- Cost A (to top of stack_a): %d\n", cheapest_node->cost_a);
-//     printf("- Cost B (to top of stack_b): %d\n", cheapest_node->cost_b);
-//     printf("- Total cost: %d\n", cheapest_node->total_cost);
-//     printf("- Target in stack_a: %d\n", cheapest_node->target->value);
+    stack_size_a = stack_size(*stack_a);
+    if (stack_size_a-- > 3 && !is_sorted(*stack_a))
+        pb(stack_a, stack_b);
+    if (stack_size_a-- > 3 && !is_sorted(*stack_a))
+        pb(stack_a, stack_b);
 
-//     if (cheapest_node->cost_a < 0 || cheapest_node->cost_b < 0) {
-//         printf("Error: Negative costs detected for value %d.\n", cheapest_node->value);
-//         exit(1);
-//     }
+	
+    while (stack_size_a-- > 3 && !is_sorted(*stack_a)) 
+    {
+        init_nodes_a(*stack_a, *stack_b);
+        move_a_to_b(stack_a, stack_b);
+    }
+    sort_three(stack_a);
 
-//     pa(stack_a, stack_b);
-// }
-
-
+   while (*stack_b)
+    	move_b_to_a(stack_a, stack_b);
+    current_index(*stack_a);
+    min_to_top(stack_a);
+}

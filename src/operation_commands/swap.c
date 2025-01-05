@@ -6,7 +6,7 @@
 /*   By: yel-bouk <yel-bouk@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 13:15:08 by yel-bouk          #+#    #+#             */
-/*   Updated: 2025/01/03 11:48:58 by yel-bouk         ###   ########.fr       */
+/*   Updated: 2025/01/05 16:48:41 by yel-bouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,9 @@ void sa(t_list ** stack_a)
 {
     swap(stack_a);
     ft_printf("sa\n");
-    total_operations++;
 }
 void sb(t_list **stack_b)
 {
     swap(stack_b);
     ft_printf("sb\n");
-    total_operations++;
 }

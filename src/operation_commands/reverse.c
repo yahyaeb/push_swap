@@ -6,14 +6,14 @@
 /*   By: yel-bouk <yel-bouk@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 14:20:06 by yel-bouk          #+#    #+#             */
-/*   Updated: 2025/01/03 11:53:35 by yel-bouk         ###   ########.fr       */
+/*   Updated: 2025/01/05 16:48:29 by yel-bouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
 void reverse_rotate(t_list **stack) {
-    if (!*stack || !(*stack)->next)
+    if (!stack || !*stack || !(*stack)->next)
         return;
 
     t_list *last = *stack;
@@ -42,18 +42,15 @@ void rra(t_list **stack_a)
 {
     reverse_rotate(stack_a);
     ft_printf("rra\n");
-    total_operations++;
 }
 void rrb(t_list **stack_b)
 {
     reverse_rotate(stack_b);
     ft_printf("rrb\n");
-    total_operations++;
 }
 void rrr(t_list **stack_a, t_list **stack_b)
 {
     reverse_rotate(stack_a);
     reverse_rotate(stack_b);
     ft_printf("rrr\n");
-    total_operations++;
 }

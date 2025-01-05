@@ -88,5 +88,6 @@ int *stack_to_array(t_list *stack, int size) {
         array[i] = current->value;
         current = current->next;
     }
+    free(array);
     return array;
 }
