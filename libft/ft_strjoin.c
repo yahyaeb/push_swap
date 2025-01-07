@@ -1,41 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-bouk <yel-bouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 14:29:40 by yel-bouk          #+#    #+#             */
-/*   Updated: 2025/01/07 18:14:35 by yel-bouk         ###   ########.fr       */
+/*   Created: 2025/01/06 14:43:47 by yel-bouk          #+#    #+#             */
+/*   Updated: 2025/01/07 18:18:01 by yel-bouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// Description: Converts a string to an integer
-
 #include "../includes/push_swap.h"
-
-long	ft_atoi(const char *str)
+// concatenates s1 & s2 into a new string.
+char	*ft_strjoin( char *s1, char *s2)
 {
-	size_t		i;
-	int			sign;
-	long			results;
+	size_t	len;
+	char	*str;
 
-	i = 0;
-	sign = 1;
-	results = 0;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
-		i++;
-	if (str[i] == '-')
-	{
-		sign = sign * -1;
-		i++;
-	}
-	else if (str[i] == '+')
-		i++;
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		results = results * 10 + (str[i] - '0');
-		i++;
-	}
-	return (results * sign);
+	if (!s1 || !s2)
+		return (NULL);
+	len = ft_strlen(s1) + ft_strlen(s2);
+	str = malloc((len + 1) * sizeof(char));
+	if (!str)
+		return (NULL);
+	ft_strlcpy(str, s1, len + 1);
+	ft_strlcat(str, s2, len + 1);
+	return (str);
 }

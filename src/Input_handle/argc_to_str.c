@@ -1,38 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handlers_chars.c                                   :+:      :+:    :+:   */
+/*   argc_to_str.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-bouk <yel-bouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/23 19:46:19 by yel-bouk          #+#    #+#             */
-/*   Updated: 2025/01/06 17:31:00 by yel-bouk         ###   ########.fr       */
+/*   Created: 2025/01/06 14:40:30 by yel-bouk          #+#    #+#             */
+/*   Updated: 2025/01/07 18:30:03 by yel-bouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "../../includes/push_swap.h"
 
-int	handle_strings(char *str)
+char	*convert_args_to_string(int argc, char **argv)
 {
-	if (!str)
-		str = "(null)";
-	ft_putstr(str);
-	return (ft_strlen(str));
-}
+	char	*result;
+	char	*temp;
+	int		i;
 
-int	handle_char(char c)
-{
-	ft_putchar(c);
-	return (1);
-}
-
-int	handle_pointers(void *ptr)
-{
-	if (!ptr)
+	result = ft_strdup("");
+	if (!result)
+		return (NULL);
+	i = 1;
+	while (i < argc)
 	{
-		write(1, "0x0", 3);
-		return (3);
+		temp = result;
+		result = ft_strjoin(result, argv[i]);
+		free(temp);
+		if (i < argc - 1)
+		{
+			temp = result;
+			result = ft_strjoin(result, " ");
+			free(temp);
+		}
+		i++;
 	}
-	write(1, "0x", 2);
-	return (2 + ft_print_pointer((uintptr_t)ptr));
+	return (result);
 }

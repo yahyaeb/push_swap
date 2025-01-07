@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-bouk <yel-bouk@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: yel-bouk <yel-bouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 19:00:46 by yel-bouk          #+#    #+#             */
-/*   Updated: 2024/12/19 16:49:28 by yel-bouk         ###   ########.fr       */
+/*   Updated: 2025/01/07 19:14:34 by yel-bouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,14 @@ char	**ft_split(char const *s, char c)
 			i++;
 		word_size = ft_wordsize(&s[i], c);
 		table[j] = malloc((word_size + 1) * sizeof(char));
-		if (!table)
-			return (free_table(table));
-		ft_strncpy(table[j], &s[i], word_size);
-		table[j][word_size] = '\0';
+		if (!table[j])  // Check individual word allocation
+			return (free_table(table));  // Free allocated memory and return NULL
+		ft_strncpy(table[j], &s[i], word_size);  // Copy word to table[j]
+		table[j][word_size] = '\0';  // Null-terminate the string
 		i += word_size;
 		j++;
 	}
-	table[j] = NULL;
+	table[j] = NULL;  // Null-terminate the array of strings
 	return (table);
 }
+

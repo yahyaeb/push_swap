@@ -1,41 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-bouk <yel-bouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 14:29:40 by yel-bouk          #+#    #+#             */
-/*   Updated: 2025/01/07 18:14:35 by yel-bouk         ###   ########.fr       */
+/*   Created: 2025/01/06 14:46:02 by yel-bouk          #+#    #+#             */
+/*   Updated: 2025/01/06 17:29:27 by yel-bouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// Description: Converts a string to an integer
-
 #include "../includes/push_swap.h"
 
-long	ft_atoi(const char *str)
+size_t	ft_strlcpy(char *dest, char *src, size_t size)
 {
-	size_t		i;
-	int			sign;
-	long			results;
+	size_t	i;
+	size_t	len;
 
+	len = ft_strlen(src);
 	i = 0;
-	sign = 1;
-	results = 0;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
-		i++;
-	if (str[i] == '-')
+	if (size == 0)
+		return (len);
+	while (src[i] && i < size - 1)
 	{
-		sign = sign * -1;
+		dest[i] = src[i];
 		i++;
 	}
-	else if (str[i] == '+')
-		i++;
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		results = results * 10 + (str[i] - '0');
-		i++;
-	}
-	return (results * sign);
+	dest[i] = '\0';
+	return (len);
 }

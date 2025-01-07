@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yel-bouk <yel-bouk@student.42nice.fr>      +#+  +:+       +#+         #
+#    By: yel-bouk <yel-bouk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/22 15:13:25 by yel-bouk          #+#    #+#              #
-#    Updated: 2025/01/01 21:42:05 by yel-bouk         ###   ########.fr        #
+#    Updated: 2025/01/07 19:20:15 by yel-bouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address -g3
+CFLAGS = -Wall -Werror -Wextra #-g -fsanitize=address -g3
 RM = rm -f
 
 SRCS = \
@@ -23,9 +23,20 @@ SRCS = \
     ./libft/ft_isdigit.c \
     ./libft/ft_lstsize.c \
     ./libft/ft_calloc.c \
+    ./libft/ft_strdup.c \
+    ./libft/ft_strjoin.c \
+    ./libft/ft_strlcat.c \
+    ./libft/ft_strlcpy.c \
+    ./src/value_finder.c \
+    ./src/error_handler.c \
     ./src/sorting_algo.c \
+    ./src/helper_functions.c \
     ./src/main.c \
-    ./src/Stack_Operations.c \
+    ./src/Input_handle/argc_to_str.c \
+    ./src/commands/push.c \
+    ./src/commands/swap.c \
+    ./src/commands/reverse.c \
+    ./src/commands/rotate.c \
     ./src/utility.c \
     ./src/stack_manipulation.c \
     ./src/input_handler.c 
@@ -49,4 +60,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re 
