@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   value_finder.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-bouk <yel-bouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-bouk <yel-bouk@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:43:05 by yel-bouk          #+#    #+#             */
-/*   Updated: 2025/01/07 12:58:38 by yel-bouk         ###   ########.fr       */
+/*   Updated: 2025/01/08 22:55:16 by yel-bouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,15 +97,15 @@ t_list	*find_max_node(t_list *stack)
 	if (!stack)
 		return (NULL);
 	
-	max = stack->value;  // Initialize max to the first node’s value
-	max_node = stack;    // Initialize max_node to the first node
+	max = stack->value;
+	max_node = stack;
 
 	while (stack)
 	{
 		if (stack->value > max)
 		{
 			max = stack->value;
-			max_node = stack;  // Update max_node if a new max is found
+			max_node = stack;
 		}
 		stack = stack->next;
 	}

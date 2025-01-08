@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sorting_algo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-bouk <yel-bouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-bouk <yel-bouk@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:21:46 by yel-bouk          #+#    #+#             */
-/*   Updated: 2025/01/07 13:08:14 by yel-bouk         ###   ########.fr       */
+/*   Updated: 2025/01/08 22:55:27 by yel-bouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@ void	sort_three(t_list **stack_a)
 	t_list	*biggest_node;
 	
 	if (stack_size(*stack_a) < 2)
-    	return;  // Do nothing if fewer than 2 elements
+    	return;
 	else if (stack_size(*stack_a) == 2 && is_sorted(*stack_a) == 0)
 	{
-    	sa(stack_a);  // Swap if the 2 elements are not sorted
+    	sa(stack_a);
     	return;
 	}
 	else if(is_sorted(*stack_a))

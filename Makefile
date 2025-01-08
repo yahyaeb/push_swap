@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yel-bouk <yel-bouk@student.42.fr>          +#+  +:+       +#+         #
+#    By: yel-bouk <yel-bouk@student.42nice.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/22 15:13:25 by yel-bouk          #+#    #+#              #
-#    Updated: 2025/01/07 19:20:15 by yel-bouk         ###   ########.fr        #
+#    Updated: 2025/01/08 22:50:52 by yel-bouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra #-g -fsanitize=address -g3
+CFLAGS = -Wall -Werror -Wextra -fsanitize=address
 RM = rm -f
 
 SRCS = \
@@ -28,6 +28,7 @@ SRCS = \
     ./libft/ft_strlcat.c \
     ./libft/ft_strlcpy.c \
     ./src/value_finder.c \
+    ./src/push_swap.c \
     ./src/error_handler.c \
     ./src/sorting_algo.c \
     ./src/helper_functions.c \

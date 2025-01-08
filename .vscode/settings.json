@@ -3,6 +3,7 @@
 		"array": "c",
 		"push_swap.h": "c",
 		"stdio.h": "c",
-		"limits.h": "c"
+		"limits.h": "c",
+		"stdlib.h": "c"
 	}
 }

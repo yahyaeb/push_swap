@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-bouk <yel-bouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-bouk <yel-bouk@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:25:16 by yel-bouk          #+#    #+#             */
-/*   Updated: 2025/01/07 19:21:04 by yel-bouk         ###   ########.fr       */
+/*   Updated: 2025/01/08 22:39:54 by yel-bouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,9 @@ char				*convert_args_to_string(int argc, char **argv);
 int	check_int_array_values(int *array, int size);
 int	check_atoi_values(long n);
 int	ft_word_count(const char *str);
-
+int	validate_input(char *str);
+int has_duplicates(t_list *stack);
+void push_swap(t_list *stack_a, t_list *stack_b);
+t_list *process_input(int argc, char *argv[]);
+int process_value(char **array, int *int_array, int *index, int size);
 #endif

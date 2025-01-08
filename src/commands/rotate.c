@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-bouk <yel-bouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-bouk <yel-bouk@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:49:39 by yel-bouk          #+#    #+#             */
-/*   Updated: 2025/01/06 17:15:06 by yel-bouk         ###   ########.fr       */
+/*   Updated: 2025/01/08 20:43:31 by yel-bouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	rotate(t_list **stack)
 	first = *stack;
 	last = *stack;
 	if (!*stack || !(*stack)->next)
+	
 		return ;
 	while (last->next)
 		last = last->next;

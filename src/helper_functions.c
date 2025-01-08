@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper_functions.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-bouk <yel-bouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-bouk <yel-bouk@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:22:03 by yel-bouk          #+#    #+#             */
-/*   Updated: 2025/01/07 19:20:56 by yel-bouk         ###   ########.fr       */
+/*   Updated: 2025/01/08 22:55:50 by yel-bouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,9 @@ int	ft_word_count(const char *str)
 	in_word = 0;
 	while (*str)
 	{
-		if (*str == ' ' || *str == '\t')  // Treat both space and tab as delimiters
+		if (*str == ' ' || *str == '\t')
 			in_word = 0;
-		else if (!in_word)  // Found the start of a new word
+		else if (!in_word)
 		{
 			count++;
 			in_word = 1;

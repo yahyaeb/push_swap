@@ -3,61 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   input_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-bouk <yel-bouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-bouk <yel-bouk@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 16:20:04 by yel-bouk          #+#    #+#             */
-/*   Updated: 2025/01/07 19:21:23 by yel-bouk         ###   ########.fr       */
+/*   Updated: 2025/01/08 22:39:45 by yel-bouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int	validate_input(char *str)
+int process_value(char **array, int *int_array, int *index, int size)
 {
-	int	i;
+    long value;
+    int i = *index, j;
 
-	i = 0;
-	while (str[i])
-	{
-		if (!ft_isdigit(str[i]) && str[i] != ' '
-			&& str[i] != '-' && str[i] != '+')
-			return (0);
-		if ((str[i] == '-' || str[i] == '+') && (!ft_isdigit(str[i + 1])
-				|| (i > 0 && str[i - 1] != ' ')))
-			return (0);
-		i++;
-	}
-	return (1);
+    value = ft_atoi(array[i]);
+    if (check_atoi_values(value)) {
+        j = i;
+        while (j < size)
+            free(array[j++]);
+        free(array);
+        free(int_array);
+        return 0;
+    }
+    int_array[i] = (int)value;
+    free(array[i]);
+    *index = i + 1;
+    return 1;
 }
 
-int *convert_to_int_array(char **array, int size) {
+int *convert_to_int_array(char **array, int size)
+{
     int *int_array;
     int i;
-    long value;
 
     int_array = malloc(size * sizeof(int));
     if (!int_array) {
-        free_table(array);  // Ensure array is freed if int_array allocation fails
-        return (NULL);
-	}
+        free_table(array);
+        return NULL;
+    }
 
-    for (i = 0; i < size; i++) {
-        value = ft_atoi(array[i]);  // Get the result of ft_atoi as long
-        if (check_atoi_values(value)) {  // Check if the value is out of int bounds
-            // Free only remaining elements to prevent double-free
-            for (int j = i; j < size; j++) {
-                free(array[j]);
-            }
-            free(array);
-            free(int_array);  // Free the allocated int_array
-            return (NULL);
-        }
-        int_array[i] = (int)value;  // Safe cast to int after validation
-        free(array[i]);
+    i = 0;
+    while (i < size) {
+        if (!process_value(array, int_array, &i, size))
+            return NULL;
     }
     free(array);
-    return (int_array);
+    return int_array;
 }
+
+
+
+
 
 
 int	*string_to_int(char *str)
