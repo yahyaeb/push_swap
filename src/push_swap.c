@@ -6,7 +6,7 @@
 /*   By: yel-bouk <yel-bouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 22:18:36 by yel-bouk          #+#    #+#             */
-/*   Updated: 2025/01/09 13:36:09 by yel-bouk         ###   ########.fr       */
+/*   Updated: 2025/01/09 16:21:41 by yel-bouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,13 @@
 void	push_swap(t_list *stack_a, t_list *stack_b)
 {
 	if (stack_size(stack_a) <= 3)
-	{
 		sort_three(&stack_a);
-	}
 	else if (stack_size(stack_a) <= 5 && !is_sorted(stack_a))
 		sort_five(&stack_a, &stack_b);
 	else
 		sort_large(&stack_a, &stack_b);
-	free_stack(&stack_a);
-	free_stack(&stack_b);
+	if (stack_a)
+		free_stack(&stack_a);
 }
 
 t_list	*process_input(int argc, char *argv[])

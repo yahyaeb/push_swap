@@ -6,7 +6,7 @@
 /*   By: yel-bouk <yel-bouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:22:03 by yel-bouk          #+#    #+#             */
-/*   Updated: 2025/01/09 13:41:11 by yel-bouk         ###   ########.fr       */
+/*   Updated: 2025/01/09 15:06:12 by yel-bouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,7 @@ void	bring_to_top_b(t_list **stack_b, int index_a)
 			rrb(stack_b);
 			index_a++;
 			if (index_a == stack_size(*stack_b))
-			{
 				index_a = 0;
-			}
 		}
 	}
 }

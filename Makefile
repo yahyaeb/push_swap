@@ -6,13 +6,13 @@
 #    By: yel-bouk <yel-bouk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/22 15:13:25 by yel-bouk          #+#    #+#              #
-#    Updated: 2025/01/09 12:33:45 by yel-bouk         ###   ########.fr        #
+#    Updated: 2025/01/09 15:16:32 by yel-bouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -g -g3
+CFLAGS = -Wall -Werror -Wextra
 RM = rm -f
 
 SRCS = \
@@ -33,7 +33,7 @@ SRCS = \
     ./src/sorting_algo.c \
     ./src/helper_functions.c \
     ./src/main.c \
-    ./src/Input_handle/argc_to_str.c \
+    ./src/Input_handler/argc_to_str.c \
     ./src/commands/push.c \
     ./src/commands/swap.c \
     ./src/commands/reverse.c \
