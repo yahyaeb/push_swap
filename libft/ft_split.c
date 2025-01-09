@@ -6,7 +6,7 @@
 /*   By: yel-bouk <yel-bouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 19:00:46 by yel-bouk          #+#    #+#             */
-/*   Updated: 2025/01/07 19:14:34 by yel-bouk         ###   ########.fr       */
+/*   Updated: 2025/01/09 13:38:48 by yel-bouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,14 +92,13 @@ char	**ft_split(char const *s, char c)
 			i++;
 		word_size = ft_wordsize(&s[i], c);
 		table[j] = malloc((word_size + 1) * sizeof(char));
-		if (!table[j])  // Check individual word allocation
-			return (free_table(table));  // Free allocated memory and return NULL
-		ft_strncpy(table[j], &s[i], word_size);  // Copy word to table[j]
-		table[j][word_size] = '\0';  // Null-terminate the string
+		if (!table[j])
+			return (free_table(table));
+		ft_strncpy(table[j], &s[i], word_size);
+		table[j][word_size] = '\0';
 		i += word_size;
 		j++;
 	}
-	table[j] = NULL;  // Null-terminate the array of strings
+	table[j] = NULL;
 	return (table);
 }
-

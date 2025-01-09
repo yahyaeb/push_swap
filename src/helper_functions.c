@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper_functions.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-bouk <yel-bouk@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: yel-bouk <yel-bouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:22:03 by yel-bouk          #+#    #+#             */
-/*   Updated: 2025/01/08 22:55:50 by yel-bouk         ###   ########.fr       */
+/*   Updated: 2025/01/09 13:41:11 by yel-bouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int	find_closest_in_range(t_list *stack, int min, int max)
 	}
 	return (closest_index);
 }
+
 int	ft_word_count(const char *str)
 {
 	int	count;

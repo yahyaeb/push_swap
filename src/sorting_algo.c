@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sorting_algo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-bouk <yel-bouk@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: yel-bouk <yel-bouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:21:46 by yel-bouk          #+#    #+#             */
-/*   Updated: 2025/01/08 22:55:27 by yel-bouk         ###   ########.fr       */
+/*   Updated: 2025/01/09 13:33:42 by yel-bouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,16 @@ void	sort_five(t_list **stack_a, t_list **stack_b)
 void	sort_three(t_list **stack_a)
 {
 	t_list	*biggest_node;
-	
+
 	if (stack_size(*stack_a) < 2)
-    	return;
+		return ;
 	else if (stack_size(*stack_a) == 2 && is_sorted(*stack_a) == 0)
 	{
-    	sa(stack_a);
-    	return;
+		sa(stack_a);
+		return ;
 	}
-	else if(is_sorted(*stack_a))
-		return; 
+	else if (is_sorted(*stack_a))
+		return ;
 	biggest_node = find_max_node(*stack_a);
 	if (biggest_node == *stack_a)
 		ra(stack_a);

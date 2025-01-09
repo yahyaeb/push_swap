@@ -6,7 +6,7 @@
 /*   By: yel-bouk <yel-bouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 14:29:40 by yel-bouk          #+#    #+#             */
-/*   Updated: 2025/01/07 18:14:35 by yel-bouk         ###   ########.fr       */
+/*   Updated: 2025/01/09 13:39:04 by yel-bouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ long	ft_atoi(const char *str)
 {
 	size_t		i;
 	int			sign;
-	long			results;
+	long		results;
 
 	i = 0;
 	sign = 1;

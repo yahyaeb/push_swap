@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-bouk <yel-bouk@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: yel-bouk <yel-bouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:25:16 by yel-bouk          #+#    #+#             */
-/*   Updated: 2025/01/08 22:39:54 by yel-bouk         ###   ########.fr       */
+/*   Updated: 2025/01/09 14:27:22 by yel-bouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 typedef struct s_list
 {
-	long				value;
+	int				value;
 	struct s_list	*next;
 }					t_list;
 
@@ -57,10 +57,13 @@ int					find_min_value(t_list *stack);
 int					has_elements_in_range(t_list *stack, int min, int max);
 int					find_closest_in_range(t_list *stack, int min, int max);
 int					*stack_to_array(t_list *stack, int size);
+int					ft_word_count(const char *str);
 t_list				*find_max_node(t_list *stack);
+t_list				*process_input(int argc, char *argv[]);
 
 /* ************************* Sorting Algorithms **************************** */
 
+void				push_swap(t_list *stack_a, t_list *stack_b);
 void				sort_three(t_list **stack_a);
 void				sort_five(t_list **stack_a, t_list **stack_b);
 void				sort_large(t_list **stack_a, t_list **stack_b);
@@ -73,10 +76,16 @@ void				bring_to_top_b(t_list **stack_b, int index_a);
 
 int					*string_to_int(char *str);
 t_list				*input_taker(char *str);
+int					check_int_array_values(int *array, int size);
+int					check_atoi_values(long n);
+int					has_duplicates(t_list *stack);
+int					validate_input(char *str);
+int					process_value(char **array, int *int_array,
+						int *index, int size);
 
 /* ************************ Utility Functions ****************************** */
 
-long	ft_atoi(const char *str);
+long				ft_atoi(const char *str);
 void				*ft_calloc(size_t count, size_t size);
 int					ft_isdigit(int c);
 int					ft_wordcount(const char *str, char delimiter);
@@ -97,12 +106,5 @@ void				push(t_list **dst, t_list **src);
 void				rev_rotate(t_list **stack);
 void				swap(t_list **stack);
 char				*convert_args_to_string(int argc, char **argv);
-int	check_int_array_values(int *array, int size);
-int	check_atoi_values(long n);
-int	ft_word_count(const char *str);
-int	validate_input(char *str);
-int has_duplicates(t_list *stack);
-void push_swap(t_list *stack_a, t_list *stack_b);
-t_list *process_input(int argc, char *argv[]);
-int process_value(char **array, int *int_array, int *index, int size);
+
 #endif
