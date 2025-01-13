@@ -1,6 +1,5 @@
 <p align="center">
   <img src="https://imgur.com/xYIkU3l" alt="Push_swap Logo">
-  <p align="center" ># push_swap</p>
 </p>
 
 # push_swap
