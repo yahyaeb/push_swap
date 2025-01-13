@@ -1,3 +1,8 @@
+<p align="center">
+  <img src="https://imgur.com/xYIkU3l" alt="Push_swap Logo">
+  <p align="center" ># push_swap</p>
+</p>
+
 # push_swap
 
 Welcome to the *Push Swap* project! This repository contains a sorting algorithm challenge designed for the 42 School curriculum. The objective is to sort a stack of random numbers in ascending order using two stacks (A and B) and a limited set of operations, striving for the **minimum number of actions**. This project enhances **algorithmic thinking** and **efficiency skills** while providing a deeper understanding of **data structures** and **sorting algorithms**.
@@ -6,6 +11,7 @@ Welcome to the *Push Swap* project! This repository contains a sorting algorithm
 To pass *push_swap*, we had to create an algorithm that sorts elements in fewer operations than the specified limits, using only the allowed commands.
 
 ## Allowed Commands:
+
 pa (push A): Take the first element at the top of B and put it at the top of A. Do nothing if B is empty.
 pb (push B): Take the first element at the top of A and put it at the top of B. Do nothing if A is empty.
 sa (swap A): Swap the first 2 elements at the top of stack A. Do nothing if there is only one or no elements.
@@ -17,6 +23,7 @@ rr: ra and rb at the same time.
 rra (reverse rotate A): Shift all elements of stack A down by 1. The last element becomes the first one.
 rrb (reverse rotate B): Shift all elements of stack b down by 1. The last element becomes the first one.
 rrr : rra and rrb at the same time.
+
 ---
 
 ### **Performance Requirements:**
